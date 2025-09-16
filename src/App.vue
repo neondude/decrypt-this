@@ -1,8 +1,9 @@
 <script setup>
 import { provide, ref, watch } from 'vue'
+import wordList from '@/utils/wordList.js'
+import router from '@/router/index.js'
 
-// Reducer function
-function reducer(state, action) {
+function gameReducer(state, action) {
   switch (action.type) {
     case 'ADD_WORD':
       return {
@@ -16,24 +17,28 @@ function reducer(state, action) {
       }
     case 'RESET':
       return {
-        words: [],
+        words: wordList.sort(() => 0.5 - Math.random()).slice(0, 4),
+      }
+    case 'SET_WORDS':
+      return {
+        ...state,
+        words: action.payload,
       }
     default:
       return state
   }
 }
-
 // Load from localStorage if available
 const savedState = localStorage.getItem('gameState')
 const initialState = savedState
   ? JSON.parse(savedState)
-  : { words: ['verylargeness', 'words', 'here', 'coding'] }
+  : { words: [], codes: [], ours: [], theirs: [] }
 
 const gameState = ref(initialState)
 
 // Dispatch function
 function dispatch(action) {
-  gameState.value = reducer(gameState.value, action)
+  gameState.value = gameReducer(gameState.value, action)
 }
 
 // Provide both state and dispatch
@@ -48,6 +53,13 @@ watch(
   },
   { deep: true },
 )
+
+const openResetModal = () => {
+  if (confirm('Are you sure you want to reset the game?')) {
+    dispatch({ type: 'RESET' })
+    router.push({ name: 'words' })
+  }
+}
 </script>
 
 <template>
@@ -61,7 +73,9 @@ watch(
           <RouterLink class="nav-link px-3" to="/about">Codes</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link px-3" to="/about">Reset</RouterLink>
+          <button class="btn btn-outline-danger px-3" type="button" @mouseup="openResetModal">
+            Reset
+          </button>
         </li>
       </ul>
     </div>
@@ -74,9 +88,6 @@ watch(
         </li>
         <li class="nav-item">
           <RouterLink class="nav-link px-3" to="/about">Theirs</RouterLink>
-        </li>
-        <li class="nav-item">
-          <RouterLink class="nav-link px-3" to="/about">Score</RouterLink>
         </li>
       </ul>
     </div>
