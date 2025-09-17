@@ -3,26 +3,21 @@ import { provide, ref, watch } from 'vue'
 import wordList from '@/utils/wordList.js'
 import router from '@/router/index.js'
 
+const emptyState = {
+  words: wordList.sort(() => 0.5 - Math.random()).slice(0, 4),
+  codes: [],
+  ours: [],
+  theirs: [],
+}
+
 function gameReducer(state, action) {
   switch (action.type) {
-    case 'ADD_WORD':
-      return {
-        ...state,
-        words: [...state.words, action.payload],
-      }
-    case 'REMOVE_WORD':
-      return {
-        ...state,
-        words: state.words.filter((w) => w !== action.payload),
-      }
     case 'RESET':
-      return {
-        words: wordList.sort(() => 0.5 - Math.random()).slice(0, 4),
-      }
-    case 'SET_WORDS':
+      return emptyState
+    case 'ADD_CODE':
       return {
         ...state,
-        words: action.payload,
+        codes: [...state.codes, action.payload],
       }
     default:
       return state
@@ -30,9 +25,7 @@ function gameReducer(state, action) {
 }
 // Load from localStorage if available
 const savedState = localStorage.getItem('gameState')
-const initialState = savedState
-  ? JSON.parse(savedState)
-  : { words: [], codes: [], ours: [], theirs: [] }
+const initialState = savedState ? JSON.parse(savedState) : emptyState
 
 const gameState = ref(initialState)
 
@@ -70,10 +63,10 @@ const openResetModal = () => {
           <RouterLink class="nav-link px-3" to="/">Words</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link px-3" to="/about">Codes</RouterLink>
+          <RouterLink class="nav-link px-3" to="/codes">Codes</RouterLink>
         </li>
         <li class="nav-item">
-          <button class="btn btn-outline-danger px-3" type="button" @mouseup="openResetModal">
+          <button class="btn btn-outline-danger px-3" type="button" @click="openResetModal">
             Reset
           </button>
         </li>
@@ -84,10 +77,10 @@ const openResetModal = () => {
     <div class="container-md d-flex justify-content-center">
       <ul class="navbar-nav flex-row">
         <li class="nav-item">
-          <RouterLink class="nav-link px-3" to="/">Ours</RouterLink>
+          <RouterLink class="nav-link px-3" to="/codes">Ours</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link px-3" to="/about">Theirs</RouterLink>
+          <RouterLink class="nav-link px-3" to="/codes">Theirs</RouterLink>
         </li>
       </ul>
     </div>
