@@ -3,33 +3,46 @@ import { provide, ref, watch } from 'vue'
 import wordList from '@/utils/wordList.js'
 import router from '@/router/index.js'
 
-const emptyState = {
-  words: wordList.sort(() => 0.5 - Math.random()).slice(0, 4),
-  codes: [],
-  ours: Array(8)
-    .fill(null)
-    .map(() => Array(3).fill({ clue: '', guess: null, correct: null })),
-  theirs: Array(8)
-    .fill(null)
-    .map(() => Array(3).fill({ clue: '', guess: null, correct: null })),
+function createEmptyState() {
+  return {
+    words: wordList.sort(() => 0.5 - Math.random()).slice(0, 4),
+    codes: [],
+    ours: Array.from({ length: 8 }, () =>
+      Array.from({ length: 3 }, () => ({ clue: '', guess: null, correct: null })),
+    ),
+    theirs: Array.from({ length: 8 }, () =>
+      Array.from({ length: 3 }, () => ({ clue: '', guess: null, correct: null })),
+    ),
+    guesses: Array.from({ length: 4 }, () => []),
+  }
 }
 
 function gameReducer(state, action) {
   switch (action.type) {
     case 'RESET':
-      return emptyState
+      return createEmptyState()
     case 'ADD_CODE':
       return {
         ...state,
         codes: [...state.codes, action.payload],
       }
+    case 'ADD_EMPTY_GUESS':
+      const { wordIndex } = action.payload
+      // new arrays have to be created for Vue reactivity to detect changes
+      const newGuesses = [...state.guesses] // Create a new array
+      newGuesses[wordIndex] = [...newGuesses[wordIndex], ''] // Create a new subarray
+      return {
+        ...state,
+        guesses: newGuesses,
+      }
+
     default:
       return state
   }
 }
 // Load from localStorage if available
 const savedState = localStorage.getItem('gameState')
-const initialState = savedState ? JSON.parse(savedState) : emptyState
+const initialState = savedState ? JSON.parse(savedState) : createEmptyState()
 
 const gameState = ref(initialState)
 
@@ -85,6 +98,9 @@ const openResetModal = () => {
         </li>
         <li class="nav-item">
           <RouterLink class="btn px-3" to="/clues/theirs">Theirs</RouterLink>
+        </li>
+        <li class="nav-item">
+          <RouterLink class="btn px-3" to="/grouped">Grouped</RouterLink>
         </li>
       </ul>
     </div>
