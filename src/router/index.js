@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import WordsView from '@/views/WordsView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.VITE_BASE_PATH || '/'),
   linkActiveClass: 'active',
   routes: [
     {
