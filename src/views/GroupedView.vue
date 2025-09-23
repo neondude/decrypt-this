@@ -58,7 +58,8 @@ function addGuess(wordIndex) {
             data-bs-target="#collapseTheirs"
             aria-expanded="true"
           >
-            Their word <span class="mx-1 badge bg-secondary">{{ Number(theirsIndex) + 1 }}</span>
+            <span class="mx-1 badge rounded-pill text-bg-dark"> {{ Number(theirsIndex) + 1 }}</span>
+            Unknown Word
           </button>
         </h2>
         <div id="collapseTheirs" class="accordion-collapse collapse">
@@ -67,16 +68,16 @@ function addGuess(wordIndex) {
               <li v-for="(clue, index) in clues" :key="index">
                 {{ clue }}
               </li>
-              <li v-for="(guess, guessIndex) in gameState.guesses[theirsIndex]" :key="guessIndex">
-                <input
-                  type="text"
-                  class="form-control my-1"
-                  placeholder="Enter your guess"
-                  v-model="gameState.guesses[theirsIndex][guessIndex]"
-                />
-              </li>
-              <button class="btn btn-primary" @click="addGuess(theirsIndex)">Add Guess</button>
             </ul>
+            <div v-for="(guess, guessIndex) in gameState.guesses[theirsIndex]" :key="guessIndex">
+              <input
+                type="text"
+                class="form-control my-1"
+                placeholder="Enter your guess"
+                v-model="gameState.guesses[theirsIndex][guessIndex]"
+              />
+            </div>
+            <button class="btn btn-outline-dark" @click="addGuess(theirsIndex)">Add Guess</button>
           </div>
         </div>
       </div>

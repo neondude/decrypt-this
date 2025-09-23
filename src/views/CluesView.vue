@@ -14,7 +14,18 @@ const clueSet = computed(() => route.params.set)
     <ul v-for="i in gameState.codes.length" class="list-group mb-3" :key="i">
       <!-- clue set number  -->
       <h4>Guess #0{{ i }} - {{ clueSet }}</h4>
+      <li class="list-group-item">
+        <div class="d-flex gap-1 align-items-center">
+          <!-- text input: grows to fill space -->
+          <div type="text" class="flex-grow-1"></div>
 
+          <!-- guess select: fixed width -->
+          <span class="flex-shrink-0 text-center" style="width: 40px; height: 20px">❓</span>
+
+          <!-- correct select: fixed width -->
+          <span class="flex-shrink-0 text-center" style="width: 40px; height: 20px">✔️</span>
+        </div>
+      </li>
       <li v-for="(clue, cidx) in gameState[clueSet][i - 1]" :key="cidx" class="list-group-item">
         <div class="d-flex gap-1 align-items-center">
           <!-- text input: grows to fill space -->
