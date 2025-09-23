@@ -13,7 +13,7 @@ const clueSet = computed(() => route.params.set)
     <div v-if="gameState.codes.length < 1" class="alert alert-info">Draw codes to give clues</div>
     <ul v-for="i in gameState.codes.length" class="list-group mb-3" :key="i">
       <!-- clue set number  -->
-      <h4>#0{{ i }}</h4>
+      <h4>Guess #0{{ i }} - {{ clueSet }}</h4>
 
       <li v-for="(clue, cidx) in gameState[clueSet][i - 1]" :key="cidx" class="list-group-item">
         <div class="d-flex gap-1 align-items-center">

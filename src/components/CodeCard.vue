@@ -18,13 +18,12 @@ function formatCode(code) {
     .join('.') // Join with dots
 }
 
-const displayTime = 3 // seconds
+const displayTime = 2 // seconds
 const hidden = ref(props.hide)
 
 function toggleHidden() {
   hidden.value = !hidden.value
   if (!hidden.value) {
-    // Auto-hide after 3 seconds
     setTimeout(() => {
       hidden.value = true
     }, displayTime * 1000)
@@ -33,7 +32,7 @@ function toggleHidden() {
 </script>
 
 <template>
-  <div @click="toggleHidden" class="card text-center my-2">
+  <div @click="toggleHidden" class="card text-center my-2" style="cursor: pointer">
     <div v-if="!hidden" class="card-body">
       <h1 class="display-1">{{ formatCode(code) }}</h1>
       <div class="progress" role="progressbar">
