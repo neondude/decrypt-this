@@ -17,7 +17,7 @@ const router = createRouter({
       component: () => import('../views/CodesView.vue'),
     },
     {
-      path: '/clues',
+      path: '/clues/:set',
       name: 'clues',
       component: () => import('../views/CluesView.vue'),
     },

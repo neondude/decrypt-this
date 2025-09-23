@@ -159,10 +159,10 @@ const openResetModal = () => {
     <div class="container-md d-flex justify-content-center">
       <ul class="navbar-nav flex-row">
         <li class="nav-item">
-          <RouterLink class="nav-link px-3" to="/clues">Ours</RouterLink>
+          <RouterLink class="nav-link px-3" to="/clues/ours">Ours</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link px-3" to="/codes">Theirs</RouterLink>
+          <RouterLink class="nav-link px-3" to="/clues/theirs">Theirs</RouterLink>
         </li>
       </ul>
     </div>

@@ -1,17 +1,21 @@
 <script setup>
-import { h, inject } from 'vue'
+import { inject, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const gameState = inject('gameState')
 const dispatch = inject('dispatch')
+const route = useRoute()
+const clueSet = computed(() => route.params.set)
 </script>
 
 <template>
   <main class="container my-1">
-    <ul v-for="(clueSets, idx) in gameState.ours" class="list-group mb-3" :key="clueSets[0].clue">
+    <div v-if="gameState.codes.length < 1" class="alert alert-info">Draw codes to give clues</div>
+    <ul v-for="i in gameState.codes.length" class="list-group mb-3" :key="i">
       <!-- clue set number  -->
-      <h4>#0{{ idx + 1 }}</h4>
+      <h4>#0{{ i }}</h4>
 
-      <li v-for="(clue, cidx) in clueSets" :key="cidx" class="list-group-item">
+      <li v-for="(clue, cidx) in gameState[clueSet][i - 1]" :key="cidx" class="list-group-item">
         <div class="d-flex gap-1 align-items-center">
           <!-- text input: grows to fill space -->
           <input
