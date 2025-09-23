@@ -6,8 +6,90 @@ import router from '@/router/index.js'
 const emptyState = {
   words: wordList.sort(() => 0.5 - Math.random()).slice(0, 4),
   codes: [],
-  ours: [],
-  theirs: [],
+  ours: [
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+  ],
+  theirs: [
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+    [
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+      { clue: '', guess: null, correct: null },
+    ],
+  ],
 }
 
 function gameReducer(state, action) {
@@ -77,7 +159,7 @@ const openResetModal = () => {
     <div class="container-md d-flex justify-content-center">
       <ul class="navbar-nav flex-row">
         <li class="nav-item">
-          <RouterLink class="nav-link px-3" to="/codes">Ours</RouterLink>
+          <RouterLink class="nav-link px-3" to="/clues">Ours</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink class="nav-link px-3" to="/codes">Theirs</RouterLink>
