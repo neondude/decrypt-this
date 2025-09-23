@@ -6,90 +6,12 @@ import router from '@/router/index.js'
 const emptyState = {
   words: wordList.sort(() => 0.5 - Math.random()).slice(0, 4),
   codes: [],
-  ours: [
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-  ],
-  theirs: [
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-    [
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-      { clue: '', guess: null, correct: null },
-    ],
-  ],
+  ours: Array(8)
+    .fill(null)
+    .map(() => Array(3).fill({ clue: '', guess: null, correct: null })),
+  theirs: Array(8)
+    .fill(null)
+    .map(() => Array(3).fill({ clue: '', guess: null, correct: null })),
 }
 
 function gameReducer(state, action) {
