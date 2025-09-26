@@ -77,10 +77,10 @@ const openResetModal = () => {
     <div class="container-md d-flex justify-content-center">
       <ul class="navbar-nav flex-row gap-1">
         <li class="nav-item">
-          <RouterLink class="btn px-3" to="/">Words</RouterLink>
+          <RouterLink class="btn px-3" to="/codes">Codes</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="btn px-3" to="/codes">Codes</RouterLink>
+          <RouterLink class="btn px-3" to="/grouped">Grouped</RouterLink>
         </li>
         <li class="nav-item">
           <button class="btn btn-outline-danger px-3" type="button" @click="openResetModal">
@@ -94,13 +94,13 @@ const openResetModal = () => {
     <div class="container-md d-flex justify-content-center">
       <ul class="navbar-nav flex-row gap-1">
         <li class="nav-item">
+          <RouterLink class="btn px-3" to="/">Words</RouterLink>
+        </li>
+        <li class="nav-item">
           <RouterLink class="btn px-3" to="/clues/ours">Ours</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink class="btn px-3" to="/clues/theirs">Theirs</RouterLink>
-        </li>
-        <li class="nav-item">
-          <RouterLink class="btn px-3" to="/grouped">Grouped</RouterLink>
         </li>
       </ul>
     </div>
